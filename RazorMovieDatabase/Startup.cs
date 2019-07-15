@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using RazorMovieDatabase.Models;
 
 namespace RazorMovieDatabase
 {
@@ -33,6 +35,9 @@ namespace RazorMovieDatabase
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddDbContext<RazorMovieDatabaseContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("RazorMovieDatabaseContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
